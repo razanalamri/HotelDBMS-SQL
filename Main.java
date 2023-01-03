@@ -24,7 +24,7 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-	        	Hotels.updateById();
+	        	Hotels.deleteById(); 
 	        	
 	             break;
 	        case 2:

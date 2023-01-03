@@ -209,30 +209,18 @@ public static void deleteById() {
          // Creating a statement
          Statement st = con.createStatement();
       
-         System.out.println("Please Enter any id to display hotel data :");
+         System.out.println("Please Enter any id to delete hotel data :");
          int userinput =scanner.nextInt();
-         System.out.println("Please Enter the new Hotel name:");
-         String hotelname=scanner.next();
-         System.out.println("Please Enter the new Hotel location:");
-         String hotellocatin=scanner.next();
+      
 
       
-         String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocatin+"' WHERE id='"+userinput+"'";
+         String sql="DELETE From Hotels WHERE id='"+userinput+"'";
 	     ResultSet result=st.executeQuery(sql);
 
-	     while(result.next()) {
-	    	 int Hid=result.getInt("id");
-	    	 String Hname=result.getString("hotel_name");
-	    	 String Hlocation=result.getString("hotel_location");
-	    	 Date CD=result.getDate("created_date");
-	    	 Date UD=result.getDate("updated_date");
-	    	 boolean Activated=result.getBoolean("is_Active");
-	    	 
-	  System.out.println(Hid+" "+Hname+" "+Hlocation+" "+CD+" "+UD+" "+Activated);
 	 
   
   
-}}
+}
 catch (Exception ex) {
 
   System.err.println(ex);
