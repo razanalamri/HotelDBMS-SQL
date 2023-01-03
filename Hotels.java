@@ -125,7 +125,7 @@ public class Hotels {
 	         
 	         
 	         
-	         String sql="SELECT * FROM Hotels WHERE id=userinput ";
+	         String sql="SELECT * FROM Hotels WHERE id='"+userinput+"'";
 		     ResultSet result=st.executeQuery(sql);
 		     while(result.next()) {
 		    	 int Hid=result.getInt("id");
