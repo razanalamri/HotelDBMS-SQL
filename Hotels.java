@@ -75,7 +75,8 @@ public class Hotels {
 
 	         // Creating a statement
 	         Statement st = con.createStatement();
-	       
+	         System.out.println("Please Enter the number of rows :");
+	         userinput=scanner.nextInt();
 	         int count=0;
 	         String sql="SELECT * FROM Hotels";
 		     ResultSet result=st.executeQuery(sql);
@@ -119,8 +120,11 @@ public class Hotels {
 	         // Creating a statement
 	         Statement st = con.createStatement();
 	       
-	         System.out.println("Please Enter any id to display :");
+	         System.out.println("Please Enter any id to display hotel data :");
 	         int userinput =scanner.nextInt();
+	         
+	         
+	         
 	         String sql="SELECT * FROM Hotels WHERE id=userinput ";
 		     ResultSet result=st.executeQuery(sql);
 		     while(result.next()) {
