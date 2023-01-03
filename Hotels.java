@@ -146,6 +146,59 @@ public class Hotels {
 	 
 }
 		    }
+	 
+	 /////////////////////////////////////////////////////////////
+	 public static void updateById(){
+		 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+	     String user = "sa";
+	     String pass = "root";
+	     Scanner scanner=new Scanner(System.in);
+	     
+	    
+	     Connection con = null;
+		 try{
+			 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			 DriverManager.registerDriver(driver);
+
+	         // Reference to connection interface
+	         con = DriverManager.getConnection(url, user,
+	                 pass);
+
+	         // Creating a statement
+	         Statement st = con.createStatement();
+	      
+	         System.out.println("Please Enter any id to display hotel data :");
+	         int userinput =scanner.nextInt();
+	         System.out.println("Please Enter the new Hotel name:");
+	         String hotelname=scanner.next();
+	         System.out.println("Please Enter the new Hotel location:");
+	         String hotellocatin=scanner.next();
+	
+	      
+	         String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocatin+"' WHERE id='"+userinput+"'";
+		     ResultSet result=st.executeQuery(sql);
+
+		     while(result.next()) {
+		    	 int Hid=result.getInt("id");
+		    	 String Hname=result.getString("hotel_name");
+		    	 String Hlocation=result.getString("hotel_location");
+		    	 Date CD=result.getDate("created_date");
+		    	 Date UD=result.getDate("updated_date");
+		    	 boolean Activated=result.getBoolean("is_Active");
+		    	 
+   	  System.out.println(Hid+" "+Hname+" "+Hlocation+" "+CD+" "+UD+" "+Activated);
+   	 
+      
+      
+  }}
+  catch (Exception ex) {
+
+      System.err.println(ex);
+	 
+}
+		
+		    }
+
 	        
 	 
 	 

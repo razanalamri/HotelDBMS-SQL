@@ -24,11 +24,11 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-	        	Hotels.getById();
+	        	Hotels.updateById();
 	        	
 	             break;
 	        case 2:
-	  
+	        	Hotels.insertIntoTable();
 	             break;
 	        case 3:
 	     
