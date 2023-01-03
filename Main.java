@@ -24,7 +24,7 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-	        	Hotels.deleteById(); 
+	        	Hotels.makeIsActiveFalseById();
 	        	
 	             break;
 	        case 2:

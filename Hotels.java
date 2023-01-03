@@ -226,9 +226,50 @@ catch (Exception ex) {
   System.err.println(ex);
  
 }
-	
-  
     }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+public static void makeIsActiveFalseById() {
+	
+	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+    String user = "sa";
+    String pass = "root";
+    Scanner scanner=new Scanner(System.in);
+    
+   
+    Connection con = null;
+	 try{
+		 Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+		 DriverManager.registerDriver(driver);
+
+        // Reference to connection interface
+        con = DriverManager.getConnection(url, user,
+                pass);
+
+        // Creating a statement
+        Statement st = con.createStatement();
+     
+        System.out.println("Please Enter any id to Update the status :");
+        int userinput =scanner.nextInt();
+   
+
+
+        String sql="UPDATE Hotels SET is_Active='false' WHERE id='"+userinput+"'";
+	     ResultSet result=st.executeQuery(sql);
+ 
+ 
+}
+catch (Exception ex) {
+
+ System.err.println(ex);
+
+}
+	
+	
+	
+}
 
 	        
 	 
