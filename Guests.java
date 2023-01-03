@@ -8,7 +8,7 @@ public class Guests {
 
 	
 	
-	  public static void main(String[] args) {
+	  public static void createdtable4() {
 	    	
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 		     String user = "sa";

@@ -8,7 +8,7 @@ public class Room {
 	
 	
 
-	  public static void main(String[] args) {
+	  public static void createdtable3() {
 	    	
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 		     String user = "sa";

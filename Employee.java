@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Employee {
 	
 
-	  public static void main(String[] args) {
+	  public static void createdtable6() {
 	    	
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 		     String user = "sa";
