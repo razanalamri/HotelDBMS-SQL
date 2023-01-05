@@ -478,10 +478,10 @@ catch (Exception ex) {
             		        // Creating a statement
             		        Statement st = con.createStatement();
             		     
-
-            		        String sql="UPDATE Hotels SET is_Active = false LIMIT 10";
+                            for(int i=0;i<10;i++) {
+            		        String sql="UPDATE Hotels SET is_Active='false' WHERE id="+i;
             			     ResultSet result=st.executeQuery(sql);
-            		 
+                            }
             		 
             		}
             		catch (Exception ex) {

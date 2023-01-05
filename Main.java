@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 	 public static void main(String[] args) {
+		 
 		 Hotels hotel=new Hotels();
 		 Scanner scanner = new Scanner(System.in);
 	
@@ -23,7 +24,8 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-	        	Hotels.insert10000IntoTable();
+	        	
+     	Hotels.insert10000IntoTable();
 	             break;
 	        case 2:
 	        	Hotels.insert1IntoTable();

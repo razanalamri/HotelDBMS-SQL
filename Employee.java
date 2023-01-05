@@ -17,7 +17,7 @@ public class Employee {
 		     String pass = "root";
 		     Scanner scanner = new Scanner(System.in);
       
-		     String Sql = "CREATE TABLE Employees " + "(id INTEGER PRIMARY KEY, " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
+		     String Sql = "CREATE TABLE Employee " + "(id INTEGER PRIMARY KEY, " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
 						+ " room_id INTEGER FOREIGN KEY REFERENCES Hotels(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
     
           Connection con = null;
@@ -52,6 +52,9 @@ public class Employee {
       
           System.err.println(ex);
       }}
+	  
+	  
+	
 
 
       	 
@@ -226,7 +229,7 @@ public class Employee {
           }
 
       ////////////////////////////////////////////////////////////////////////////////////
-
+     
 
       public static void makeIsActiveFalseById() {
       	
