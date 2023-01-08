@@ -24,13 +24,15 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-	        	
-     	Hotels.insert10000IntoTable();
+	        	Room.insertIntoTable();
+ 	         //Hotels.insert10000IntoTable();
 	             break;
 	        case 2:
+	        
 	        	Hotels.insert1IntoTable();
 	             break;
 	        case 3:
+	        
 	             Hotels.read10FromTable(10);
 	             break;
 	        case 4:

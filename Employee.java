@@ -1,9 +1,9 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class Employee {
 		     Scanner scanner = new Scanner(System.in);
       
 		     String Sql = "CREATE TABLE Employee " + "(id INTEGER PRIMARY KEY, " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
-						+ " room_id INTEGER FOREIGN KEY REFERENCES Hotels(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
+						+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
     
           Connection con = null;
 
@@ -280,19 +280,17 @@ public class Employee {
           	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
                String user = "sa";
                String pass = "root";
-               
+               Date date=new Date(System.currentTimeMillis());
           	 Scanner scanner=new Scanner(System.in);
            	System.out.println("Please type the number of rows");
                int userinput =scanner.nextInt();
                int employee_type_id=123;
                int room_id=1;
-               String created_date="1996-03-01";
-               String updated_date="1996-08-02";
                boolean is_Active=true;
                Random rn = new Random();
                Integer numberToAdd = rn.nextInt(100);
                for(int i=0; i<=userinput;i++) {
-               String sql = "insert into Employee values ("+i+numberToAdd+", '"+employee_type_id+i+"','"+room_id+"','"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+               String sql = "insert into Employee values ("+i+numberToAdd+", '"+employee_type_id+i+"','"+room_id+"','"+date+"', '"+date+"', '"+is_Active+"')";
                Connection con = null;
                try {
 

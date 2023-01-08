@@ -1,9 +1,9 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -281,20 +281,61 @@ public class Room {
 	    	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 	         String user = "sa";
 	         String pass = "root";
-	         
+	      
+	    
+	         Date date=new Date(System.currentTimeMillis());
 	    	 Scanner scanner=new Scanner(System.in);
-	     	System.out.println("Please type the number of rows");
-	         int userinput =scanner.nextInt();
-	         int room_type_id=1;
-	         int hotel_id=1;
-	         String created_date="1996-03-01";
-	         String updated_date="1996-08-02";
+	    	   Connection con = null;
+	    	
 	         boolean is_Active=true;
 	         Random rn = new Random();
 	         Integer numberToAdd = rn.nextInt(100);
-	         for(int i=0; i<=userinput;i++) {
-	         String sql = "insert into Room values ("+i+numberToAdd+", '"+room_type_id+"', '"+hotel_id+"','"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
-	         Connection con = null;
+	        
+	        	Scanner scanner1=new Scanner(System.in);
+	        	 
+	        	 System.out.println(" Select one Hotel  ? "
+	        				+ " 1-W " + " 2-ParkINN" + " 3-Jumaira ");
+	        				int hotel_id = scanner.nextInt();
+	        				String hotel_name = "";
+	        				if (hotel_id > 0 && hotel_id < 4) {
+	        					if (hotel_id == 1) {
+	        						hotel_name = "W";
+	        					} else if (hotel_id == 2) {
+	        						hotel_name = "ParkINN";
+	        					} else {
+	        						hotel_name = "Jumaira";
+	        					}
+	        				}
+	        				
+	        	String sqlQuery_GetHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotel_name + " '";
+	        
+	        				
+	        				System.out.println(" Select Type of Room  ? "
+	     	        				+ " 1-STANDARD " + " 2-DELUXE" + " 3-SUITE ");
+	     	        				int room_type_id = scanner1.nextInt();
+	     	        				String room_type_name = "";
+	     	        				if (room_type_id>0 && room_type_id<4) {
+	     	        					if (room_type_id==1) {
+	     	        						room_type_name = "STANDARD";
+	     	        					} else if (room_type_id==2) {
+	     	        						room_type_name = "DELUXE";
+	     	        					} else {
+	     	        						room_type_name = "SUITE";
+	     	        					}}
+	     	        				
+	        	String sqlQuery_GetRoomId = "SELECT id From Room_type WHERE room_type_name =" + " '" + room_type_name + " '";
+	        	
+	        	
+			 
+			    
+	        				
+	         String sql = "insert into Room_Type(id,room_type_name,created_date,is_Active)values(1,'STANDARD',"+date+",true)";
+             String sql2 = "insert into Room_Type(id,room_type_name,created_date,is_Active)values(2,'DELUXE',"+date+",true)";
+             String sql3 = "insert into Room_Type(id,room_type_name,created_date,is_Active)values(3,'SUITE',"+date+",true)";
+             Connection con2 = null;
+	         
+	     
+	      
 	         try {
 
 	             Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
@@ -302,12 +343,14 @@ public class Room {
 	             DriverManager.registerDriver(driver);
 
 	             // Reference to connection interface
+	       
 	             con = DriverManager.getConnection(url, user,
 	                     pass);
 
 	             // Creating a statement
-	             Statement st = con.createStatement();
+	              Statement st = con.createStatement();
 
+	             
 	             // Executing query
 	             int m = st.executeUpdate(sql);
 	             if (m >=  0)
@@ -326,4 +369,4 @@ public class Room {
 	    
 	     
 	     
-	     }}
+	     }

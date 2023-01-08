@@ -1,11 +1,11 @@
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -280,19 +280,18 @@ catch (Exception ex) {
     	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
          String user = "sa";
          String pass = "root";
-         
+         Date date=new Date(System.currentTimeMillis());
     	 Scanner scanner=new Scanner(System.in);
      	System.out.println("Please type the number of rows");
          int userinput =scanner.nextInt();
          String hotel_name="Plaza";
          String hotel_location="Seeb";
-         String created_date="1996-03-01";
-         String updated_date="1996-08-02";
+   ;
          boolean is_Active=true;
          Random rn = new Random();
          Integer numberToAdd = rn.nextInt(100);
          for(int i=0; i<=userinput;i++) {
-         String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+         String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+date+"', '"+date+"', '"+is_Active+"')";
          Connection con = null;
          try {
 

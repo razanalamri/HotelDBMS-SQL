@@ -1,9 +1,9 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -54,8 +54,8 @@ public class Guests {
   catch (Exception ex) {
   
       System.err.println(ex);
-  }
-}}
+  }}
+
 	  public static void readFromTable(int userinput){
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 		     String user = "sa";
@@ -287,21 +287,20 @@ public class Guests {
 	    	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 	         String user = "sa";
 	         String pass = "root";
-	         
+	         Date date=new Date(System.currentTimeMillis());
 	    	 Scanner scanner=new Scanner(System.in);
 	     	System.out.println("Please type the number of rows");
 	         int userinput =scanner.nextInt();
+	         Random rn = new Random();
+	         Integer numberToAdd = rn.nextInt(100);
 	         String guest_name="Razan";
 	         String guest_phone="93555987";
 	         int guest_accompanying_members=123;
 	         int guest_payment_amount=322;
-	         String created_date="1996-03-01";
-	         String updated_date="1996-08-02";
 	         boolean is_Active=true;
-	         Random rn = new Random();
-	         Integer numberToAdd = rn.nextInt(100);
+	       
 	         for(int i=0; i<=userinput;i++) {
-	         String sql = "insert into Guests values ("+i+numberToAdd+", '"+guest_name+i+"', '"+93555987+i+"','"+guest_accompanying_members+"','"+guest_payment_amount+"','"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+	         String sql = "insert into Guests values ("+numberToAdd+", '"+guest_name+i+"', '"+guest_phone+i+"','"+guest_accompanying_members+"','"+guest_payment_amount+"','"+room_id+"','"+hotel_id+"','"+date+"', '"+date+"', '"+is_Active+"')";
 	         Connection con = null;
 	         try {
 
