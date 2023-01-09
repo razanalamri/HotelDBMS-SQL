@@ -327,18 +327,8 @@ public class Employee {
 
   		System.out.println(" Type number of room (number should be between 1-47)");
   		int room_id2 = scanner1.nextInt();
-//  		String room_type_name = "";
-//  		if (room_id > 0 && room_id < 48) {
-//  			if (room_id == 1) {
-//  				room_type_name = "STANDARD";
-//  			} else if (room_id == 2) {
-//  				room_type_name = "DELUXE";
-//  			} else {
-//  				room_type_name = "SUITE";
-//  			}
-//  		}
 
-  		String sqlQuery_GetRoomId = "SELECT id From Employee WHERE room_id =" + " '" + room_id2 + " '";
+  		String sqlQuery_GetRoomId = "SELECT id From Rooms WHERE room_id =" + " '" + room_id2 + " '";
           try {
   			st= con.createStatement();
   			ResultSet result2 = st.executeQuery(sqlQuery_GetRoomId);

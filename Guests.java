@@ -3,6 +3,7 @@ import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.Scanner;
@@ -10,7 +11,8 @@ import java.util.Scanner;
 public class Guests {
 
 	
-	
+	public static Connection con;
+
 	  public static void createdtable4() {
 	    	
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
@@ -22,7 +24,7 @@ public class Guests {
 						+ " guest_phone VARCHAR(50) NOT NULL, " + " guest_accompanying_members INTEGER NOT NULL, " + " guest_payment_amount INTEGER NOT NULL,"
 								+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), "
 								+ " hotel_id INTEGER FOREIGN KEY REFERENCES Hotels(id), "+" created_date date NOT NULL, "+" updated_date date, "+" is_Active bit NOT NULL)";
-
+		     
       Connection con = null;
 
       try {
@@ -282,55 +284,114 @@ public class Guests {
 		 /////////////////////////////////////////////////////////////////////////////////
 		 
 	     
-	     public static void insertIntoTable(){
-	    	 
-	    	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
-	         String user = "sa";
-	         String pass = "root";
-	         Date date=new Date(System.currentTimeMillis());
-	    	 Scanner scanner=new Scanner(System.in);
-	     	System.out.println("Please type the number of rows");
-	         int userinput =scanner.nextInt();
-	         Random rn = new Random();
-	         Integer numberToAdd = rn.nextInt(100);
-	         String guest_name="Razan";
-	         String guest_phone="93555987";
-	         int guest_accompanying_members=123;
-	         int guest_payment_amount=322;
-	         boolean is_Active=true;
-	       
-	         for(int i=0; i<=userinput;i++) {
-	         String sql = "insert into Guests values ("+numberToAdd+", '"+guest_name+i+"', '"+guest_phone+i+"','"+guest_accompanying_members+"','"+guest_payment_amount+"','"+room_id+"','"+hotel_id+"','"+date+"', '"+date+"', '"+is_Active+"')";
-	         Connection con = null;
-	         try {
+	public static void insertIntoTable() {
 
-	             Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-	             // Registering drivers
-	             DriverManager.registerDriver(driver);
+		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+		String user = "sa";
+		String pass = "root";
+		Statement st = null;
 
-	             // Reference to connection interface
-	             con = DriverManager.getConnection(url, user,
-	                     pass);
+		Date date = new Date(System.currentTimeMillis());
+		int idOfHotelType=1;
+		Integer idOfRoom =1;
+		boolean is_Active = true;
+		Random rn = new Random();
+		Integer numberToAdd = rn.nextInt(100);
 
-	             // Creating a statement
-	             Statement st = con.createStatement();
+		Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Please Enter the number of rows ");
+        int userinput=scanner1.nextInt();
+        
+        for(int i=0;i<userinput;i++) {
+        	System.out.println("Please Enter the Guest Name:");
+        	String GM=scanner1.next();
+        	System.out.println("Please Enter the Guest Phone:");
+        	String GP=scanner1.next();
+        	System.out.println("Please Enter theguest_accompanying_members:");
+        	int members=scanner1.nextInt();
+        	System.out.println("Please Enter guest_payment_amount:");
+        	int pay=scanner1.nextInt();
 
-	             // Executing query
-	             int m = st.executeUpdate(sql);
-	             if (m >=  0)
-	                 System.out.println("Data insearted successfully");
-	             else
-	                 System.out.println("insert failed");
+        	
+        System.out.println(" Type number of room (number should be between 1-47)");
+  		int room_id2 = scanner1.nextInt();
 
-	             
-	             con.close();
-	         }
-	         catch (Exception ex) {
+  		String sqlQuery_GetRoomId = "SELECT id From Rooms WHERE room_id =" + " '" + room_id2 + " '";
+          try {
+  			con = DriverManager.getConnection(url, user, pass);
 
-	             System.err.println(ex);
-	    	 
-	     }}}}
-	    
-	     
-	     
-	     
+  			st= con.createStatement();
+  			ResultSet result2 = st.executeQuery(sqlQuery_GetRoomId);
+             while(result2.next()) {
+  	idOfRoom=result2.getInt("id");
+           }
+  		} catch (SQLException e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+        
+        
+        
+       
+        	
+		System.out.println(" Select one Hotel  ? " + " 1-W " + " 2-ParkINN" + " 3-Jumaira ");
+		int hotel_id = scanner1.nextInt();
+		String hotel_name = "";
+		if (hotel_id > 1 && hotel_id < 8) {
+			if (hotel_id == 2) {
+				hotel_name = "W";
+			} else if (hotel_id == 6) {
+				hotel_name = "ParkINN";
+			} else {
+				hotel_name = "Jumaira";
+			}
+		}
+
+		String sqlQuery_GetHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotel_name + " '";
+  
+     try {
+    	 con = DriverManager.getConnection(url, user, pass);
+         st= con.createStatement();
+ 		ResultSet result = st.executeQuery(sqlQuery_GetHotelId);
+		while(result.next()) {
+		idOfHotelType=result.getInt("id");
+		  }
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+		
+          String sql = "insert into Guests(guest_name,guest_phone,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,is_Active)values('"+GM+"','"+GP+"','"+members+"','"+pay+"','"+idOfRoom+"','"+idOfHotelType+"','" + date
+				+ "',1)";
+	
+
+		try {
+
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			// Registering drivers
+			DriverManager.registerDriver(driver);
+
+			// Reference to connection interface
+
+			con = DriverManager.getConnection(url, user, pass);
+
+			// Creating a statement
+			 st = con.createStatement();
+
+			// Executing query
+			int m = st.executeUpdate(sql);
+			if (m >= 0)
+				System.out.println("Data insearted successfully");
+			else
+				System.out.println("insert failed");
+
+			con.close();
+		} catch (Exception ex) {
+
+			System.err.println(ex);
+
+		}
+	}}
+
+}

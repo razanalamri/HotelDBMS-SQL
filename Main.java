@@ -24,12 +24,8 @@ public class Main {
 	        switch(option) {
 	        
 	        case 1:
-//	        	Hotels.createdtable1();
-//	        	Room_Type.createdtable2();
-//	        	Room.createdtable3();
-//	        	Guests.createdtable4();
-        	Employee.insertIntoTable();
- 	         //Hotels.insert10000IntoTable();
+
+ 	         Hotels.insert10000IntoTable();
 	             break;
 	        case 2:
 	        
