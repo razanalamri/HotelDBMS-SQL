@@ -19,7 +19,7 @@ public class Employee_Type {
 		     String pass = "root";
 		     Scanner scanner = new Scanner(System.in);
       
-		     String Sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY, " + " employee_type_name VARCHAR(50) NOT NULL, "
+		     String Sql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " employee_type_name VARCHAR(50) NOT NULL, "
 						+ " created_date date NOT NULL, " + " updated_date date, " + " is_Active bit NOT NULL)";
 
 

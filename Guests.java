@@ -18,7 +18,7 @@ public class Guests {
 		     String pass = "root";
 		     Scanner scanner = new Scanner(System.in);
 		     
-		     String Sql = "CREATE TABLE Guests " + "(id INTEGER PRIMARY KEY, " + " guest_name VARCHAR(50) NOT NULL, "
+		     String Sql = "CREATE TABLE Guests " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " guest_name VARCHAR(50) NOT NULL, "
 						+ " guest_phone VARCHAR(50) NOT NULL, " + " guest_accompanying_members INTEGER NOT NULL, " + " guest_payment_amount INTEGER NOT NULL,"
 								+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), "
 								+ " hotel_id INTEGER FOREIGN KEY REFERENCES Hotels(id), "+" created_date date NOT NULL, "+" updated_date date, "+" is_Active bit NOT NULL)";

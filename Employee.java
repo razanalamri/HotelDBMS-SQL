@@ -3,13 +3,14 @@ import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Employee {
 	
-
+	  public static Connection con;
 	  public static void createdtable6() {
 	    	
 			 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
@@ -17,7 +18,7 @@ public class Employee {
 		     String pass = "root";
 		     Scanner scanner = new Scanner(System.in);
       
-		     String Sql = "CREATE TABLE Employee " + "(id INTEGER PRIMARY KEY, " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
+		     String Sql = "CREATE TABLE Employee " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
 						+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
     
           Connection con = null;
@@ -275,48 +276,108 @@ public class Employee {
       	 /////////////////////////////////////////////////////////////////////////////////
       	 
            
-           public static void insertIntoTable(){
-          	 
-          	 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
-               String user = "sa";
-               String pass = "root";
-               Date date=new Date(System.currentTimeMillis());
-          	 Scanner scanner=new Scanner(System.in);
-           	System.out.println("Please type the number of rows");
-               int userinput =scanner.nextInt();
-               int employee_type_id=123;
-               int room_id=1;
-               boolean is_Active=true;
-               Random rn = new Random();
-               Integer numberToAdd = rn.nextInt(100);
-               for(int i=0; i<=userinput;i++) {
-               String sql = "insert into Employee values ("+i+numberToAdd+", '"+employee_type_id+i+"','"+room_id+"','"+date+"', '"+date+"', '"+is_Active+"')";
-               Connection con = null;
-               try {
+      public static void insertIntoTable() {
 
-                   Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-                   // Registering drivers
-                   DriverManager.registerDriver(driver);
+  		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+  		String user = "sa";
+  		String pass = "root";
+  		Statement st = null;
 
-                   // Reference to connection interface
-                   con = DriverManager.getConnection(url, user,
-                           pass);
+  		Date date = new Date(System.currentTimeMillis());
+  		int idOfEmployeeType=1;
+  		Integer idOfRoom =1;
+  		boolean is_Active = true;
+  		Random rn = new Random();
+  		Integer numberToAdd = rn.nextInt(100);
 
-                   // Creating a statement
-                   Statement st = con.createStatement();
+  		Scanner scanner1 = new Scanner(System.in);
+          System.out.println("Please Enter the number of rows ");
+          int userinput=scanner1.nextInt();
+          for(int i=0;i<userinput;i++) {
+  		System.out.println(" Select one Employee_Type  ? " + " 1-MANAGER " + " 2-ATTENDANT" + " 3-VALET  "+ "4-BUTLER"+ "5-DIRECTOR");
+  		int Employee_type_id = scanner1.nextInt();
+  		String Employee_name = "";
+  		if (Employee_type_id > 1 && Employee_type_id < 8) {
+  			if (Employee_type_id == 1) {
+  				Employee_name = "MANAGER";
+  			} else if (Employee_type_id == 2) {
+  				Employee_name = "ATTENDANT";
+  			} else if (Employee_type_id == 3) {
+  				Employee_name = "VALET";
+  			} else if (Employee_type_id == 6) {
+  				Employee_name = "BUTLER";
+  			} else {
+  				Employee_name = "DIRECTOR";
+  			}
+  		}
 
-                   // Executing query
-                   int m = st.executeUpdate(sql);
-                   if (m >=  0)
-                       System.out.println("Data insearted successfully");
-                   else
-                       System.out.println("insert failed");
+  		String sqlQuery_GetEmployee_nameId = "SELECT id From Employee_Type WHERE Employee_type_name =" + " '" + Employee_name + " '";
+    
+       try {
+      	 con = DriverManager.getConnection(url, user, pass);
+           st= con.createStatement();
+   		ResultSet result = st.executeQuery(sqlQuery_GetEmployee_nameId);
+  		while(result.next()) {
+  			idOfEmployeeType=result.getInt("id");
+  		  }
+  	} catch (SQLException e1) {
+  		// TODO Auto-generated catch block
+  		e1.printStackTrace();
+  	}
 
-                   
-                   con.close();
-               }
-               catch (Exception ex) {
+  		System.out.println(" Type number of room (number should be between 1-47)");
+  		int room_id2 = scanner1.nextInt();
+//  		String room_type_name = "";
+//  		if (room_id > 0 && room_id < 48) {
+//  			if (room_id == 1) {
+//  				room_type_name = "STANDARD";
+//  			} else if (room_id == 2) {
+//  				room_type_name = "DELUXE";
+//  			} else {
+//  				room_type_name = "SUITE";
+//  			}
+//  		}
 
-                   System.err.println(ex);
-          	 
-           }}}}
+  		String sqlQuery_GetRoomId = "SELECT id From Employee WHERE room_id =" + " '" + room_id2 + " '";
+          try {
+  			st= con.createStatement();
+  			ResultSet result2 = st.executeQuery(sqlQuery_GetRoomId);
+             while(result2.next()) {
+  	idOfRoom=result2.getInt("id");
+           }
+  		} catch (SQLException e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  		
+            String sql = "insert into Employee(employee_type_id,room_id,created_date,is_Active)values('"+idOfEmployeeType+"','"+room_id2+"','" + date
+  				+ "',1)";
+  	
+
+  		try {
+
+  			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+  			// Registering drivers
+  			DriverManager.registerDriver(driver);
+
+  			// Reference to connection interface
+
+  			con = DriverManager.getConnection(url, user, pass);
+
+  			// Creating a statement
+  			 st = con.createStatement();
+
+  			// Executing query
+  			int m = st.executeUpdate(sql);
+  			if (m >= 0)
+  				System.out.println("Data insearted successfully");
+  			else
+  				System.out.println("insert failed");
+
+  			con.close();
+  		} catch (Exception ex) {
+
+  			System.err.println(ex);
+
+  		}
+  	}}}

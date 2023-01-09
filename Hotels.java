@@ -22,7 +22,7 @@ public class Hotels {
     
      
      //creating first table
-     String Sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY, " + " hotel_name VARCHAR(50) NOt NULL, "
+     String Sql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " hotel_name VARCHAR(50) NOt NULL, "
 				+ " hotel_location VARCHAR(50), " + " created_date date NOT NULL, " + " updated_date date, "+"is_Active bit NOT NULL)";
      
      Connection con = null;
@@ -284,14 +284,14 @@ catch (Exception ex) {
     	 Scanner scanner=new Scanner(System.in);
      	System.out.println("Please type the number of rows");
          int userinput =scanner.nextInt();
-         String hotel_name="Plaza";
-         String hotel_location="Seeb";
+         String hotel_name="ParkINN";
+         String hotel_location="Muscat";
    ;
          boolean is_Active=true;
          Random rn = new Random();
          Integer numberToAdd = rn.nextInt(100);
          for(int i=0; i<=userinput;i++) {
-         String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+date+"', '"+date+"', '"+is_Active+"')";
+         String sql = "insert into Hotels values ('"+hotel_name+i+"', '"+hotel_location+i+"', '"+date+"', '"+date+"', '"+is_Active+"')";
          Connection con = null;
          try {
 

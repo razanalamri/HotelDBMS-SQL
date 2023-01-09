@@ -19,7 +19,7 @@ public class Room_Type {
 		     Scanner scanner = new Scanner(System.in);
 		     
 	         
-		     String Sql = "CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY, " + " room_type_name VARCHAR(50) NOt NULL, "
+		     String Sql = "CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " room_type_name VARCHAR(50) NOt NULL, "
 						+ " created_date date, " + " updated_date date, " + " is_Active bit NOT NULL)";
 	             
 	       
