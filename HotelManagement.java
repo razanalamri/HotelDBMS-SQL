@@ -12,7 +12,8 @@ public class HotelManagement {
 		 
 		  //endByE();
 		  //guestsPayingmorethan1000(); 
-		  DELUXErooms();
+		  //DELUXErooms();
+		  GuestsHavingAInThierNames();
 		  
 		  
 		  
@@ -149,6 +150,49 @@ public class HotelManagement {
 
 	                     System.err.println(ex);
 	                 }}
+	 
+	 
+	 public static void GuestsHavingAInThierNames() {
+		 
+		 	
+		 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+	     String user = "sa";
+	     String pass = "root";
+	     Scanner scanner1=new Scanner(System.in);
+	    
+	            		
+	            		
+	                 
+	                 Connection con = null;
+	                 try {
+
+	                     Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+	                     // Registering drivers
+	                     DriverManager.registerDriver(driver);
+
+	                     // Reference to connection interface
+	                     con = DriverManager.getConnection(url, user,
+	                             pass);
+
+	                     // Creating a statement
+	                     Statement st = con.createStatement();
+	                     
+	                     
+	                     String Sql ="select * from Guests where guest_name like '%A%'";
+	                     ResultSet result=st.executeQuery(Sql);
+	        		     while(result.next()) {
+	        		    	 String guestname=result.getString("guest_name");
+	        		    
+	           	               System.out.println(guestname);
+	              
+	                 
+	                 }}
+	                 catch (Exception ex) {
+
+	                     System.err.println(ex);
+	                 }
+	                 }
+	 
 
 
 
