@@ -15,7 +15,8 @@ public class HotelManagement {
 		// DELUXErooms();
 		// GuestsHavingAInThierNames();
 		// isActive0();
-		HotelsH();
+		//HotelsH();
+	Employee.insertIntoTable();
 
 	}
 
