@@ -11,7 +11,8 @@ public class HotelManagement {
 	  public static void main (String[] args) {
 		 
 		  //endByE();
-		  guestsPayingmorethan1000(); 
+		  //guestsPayingmorethan1000(); 
+		  DELUXErooms();
 		  
 		  
 		  
@@ -105,6 +106,49 @@ public class HotelManagement {
 	                     System.err.println(ex);
 	                 }
 	                 }
+	 
+	 
+	 public static void DELUXErooms() {
+		 
+		 	
+		 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+	     String user = "sa";
+	     String pass = "root";
+	     Scanner scanner1=new Scanner(System.in);
+	    
+	            		
+	            		
+	                 
+	                 Connection con = null;
+	                 try {
+
+	                     Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+	                     // Registering drivers
+	                     DriverManager.registerDriver(driver);
+
+	                     // Reference to connection interface
+	                     con = DriverManager.getConnection(url, user,
+	                             pass);
+
+	                     // Creating a statement
+	                     Statement st = con.createStatement();
+	                     
+	                     String Sql ="SELECT COUNT(*) as 'count' FROM Guests INNER JOIN Rooms ON Guests.hotel_id=Rooms.hotel_id WHERE  room_type_id=2";
+	                     	
+	                     ResultSet result=st.executeQuery(Sql);
+	        		     while(result.next()) {
+	        		    	 int guestnumber=result.getInt("count");
+	        		    
+	           	               System.out.println(guestnumber);
+	           	 
+
+	       
+	                
+	                 }}
+	                 catch (Exception ex) {
+
+	                     System.err.println(ex);
+	                 }}
 
 
 
