@@ -13,7 +13,9 @@ public class HotelManagement {
 		  //endByE();
 		  //guestsPayingmorethan1000(); 
 		  //DELUXErooms();
-		  GuestsHavingAInThierNames();
+		  //GuestsHavingAInThierNames();
+		  isActive0();
+		
 		  
 		  
 		  
@@ -152,7 +154,7 @@ public class HotelManagement {
 	                 }}
 	 
 	 
-	 public static void GuestsHavingAInThierNames() {
+	 public static void isActive0() {
 		 
 		 	
 		 String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
@@ -178,13 +180,17 @@ public class HotelManagement {
 	                     Statement st = con.createStatement();
 	                     
 	                     
-	                     String Sql ="select * from Guests where guest_name like '%A%'";
+	                     String Sql ="Select * from Rooms where room_type_id=2 AND is_Active=0";
 	                     ResultSet result=st.executeQuery(Sql);
 	        		     while(result.next()) {
-	        		    	 String guestname=result.getString("guest_name");
-	        		    
-	           	               System.out.println(guestname);
-	              
+	        		    	 int Rid = result.getInt("id");
+	        					String Rtype = result.getString("room_type_id");
+	        					String Rhtype = result.getString("hotel_id");
+	        					Date CD = result.getDate("created_date");
+	        					Date UD = result.getDate("updated_date");
+	        					boolean Activated = result.getBoolean("is_Active");
+
+	        					System.out.println(Rid + " " + Rtype + " " + Rhtype + " " + CD + " " + UD + " " + Activated);
 	                 
 	                 }}
 	                 catch (Exception ex) {
